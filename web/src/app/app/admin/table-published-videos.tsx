@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Pencil } from "lucide-react";
+import Link from "next/link";
 
 export function TablePublishedVideos(){
   return(
@@ -23,7 +26,20 @@ export function TablePublishedVideos(){
               <TableCell>Photoshop</TableCell>
               <TableCell>Comunicação</TableCell>
               <TableCell>Jeneyglaucia</TableCell>
-              <TableCell></TableCell>
+              <TableCell>
+                <div>
+                  <Button 
+                    asChild 
+                    size={"icon"} 
+                    className="size-7"
+                    variant={"outline"} 
+                  >
+                    <Link href="">
+                      <Pencil className="size-4"/>
+                    </Link>
+                  </Button>
+                </div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
