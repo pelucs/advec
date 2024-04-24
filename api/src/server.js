@@ -1,11 +1,11 @@
-import express from "express";
-import { routes } from "./routes";
-import cors from "cors";
-import dotenv from "dotenv";
+const express = require("express");
+const routes = require("./router")
+const cors = require("cors");
+const dotenv = require("dotenv");
 
-dotenv.config
+dotenv.config();
 
-const PORT: number = process.env.PORT ?
+const PORT = process.env.PORT ?
     Number(process.env.PORT) :
     3333;
 
