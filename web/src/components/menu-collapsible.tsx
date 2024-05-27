@@ -39,7 +39,7 @@ export function MenuCollapsible(){
       <CollapsibleContent className="mt-2 pl-5 transition-all">
         <div className="border-l pl-2 flex flex-col gap-2">
           <Link 
-            href="" 
+            href="/app/comunicacao" 
             className="py-2 px-3 rounded hover:bg-secondary transition-colors hover:text-orange-500"
           >
             Comunicação

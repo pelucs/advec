@@ -9,11 +9,11 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 
-interface FormCreateNewVideoProps{
+interface FormEditVideoProps{
   setVideoId: (newString: string) => void
 }
 
-export function FormCreateNewVideo({ setVideoId }: FormCreateNewVideoProps){
+export function FormEditVideo({ setVideoId }: FormEditVideoProps){
   return(
     <div>
       <form className="space-y-5">
@@ -82,7 +82,7 @@ export function FormCreateNewVideo({ setVideoId }: FormCreateNewVideoProps){
         </div>
 
         <Button className="button-theme w-full">
-          Registrar Aula
+          Salvar alterações
         </Button>
       </form>
     </div>

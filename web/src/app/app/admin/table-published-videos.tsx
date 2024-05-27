@@ -5,10 +5,10 @@ import Link from "next/link";
 
 export function TablePublishedVideos(){
   return(
-    <div className="mt-5 border rounded-md">
+    <div className="mt-3 p-5 border rounded-md">
       <Table>
         <TableHeader>
-          <TableRow>
+          <TableRow className="text-primary-foreground">
             <TableHead className="w-36">ID</TableHead>
             <TableHead>Título</TableHead>
             <TableHead>Módulo</TableHead>
@@ -20,13 +20,13 @@ export function TablePublishedVideos(){
 
         <TableBody>
           {Array.from({ length: 10 }).map((_, i) => (
-            <TableRow key={i} className="text-muted-foreground">
+            <TableRow key={i} className="">
               <TableCell>0BdELGwOLbI</TableCell>
               <TableCell>Introdução: Como criar uma...</TableCell>
               <TableCell>Photoshop</TableCell>
               <TableCell>Comunicação</TableCell>
               <TableCell>Jeneyglaucia</TableCell>
-              <TableCell>
+              <TableCell className="text-right">
                 <div>
                   <Button 
                     asChild 
@@ -34,7 +34,7 @@ export function TablePublishedVideos(){
                     className="size-7"
                     variant={"outline"} 
                   >
-                    <Link href="">
+                    <Link href="/app/admin/editar-video">
                       <Pencil className="size-4"/>
                     </Link>
                   </Button>

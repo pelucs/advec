@@ -3,7 +3,7 @@
 import { Frown } from "lucide-react";
 import { useState } from "react";
 
-import YouTube, { YouTubeProps } from "react-youtube";
+import YouTube, { YouTubeEvent, YouTubeProps } from "react-youtube";
 
 interface VideoPreviewProps{
   videoId: string;
@@ -14,16 +14,18 @@ export function VideoPreview({ videoId }: VideoPreviewProps){
   const [error, setError] = useState<boolean>(false);
 
   //Conferir
-  const onError = () => {
-    alert("ERRO")
-    setError(true)
+  const onError = async (n: YouTubeEvent<number>) => {
+    if(n){
+      setError(true);
+    }
   };
 
   const opts: YouTubeProps['opts'] = {
-    height: '390',
-    width: '640',
+    width: '620',
+    height: '370',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
+      showinfo: 0,
       autoplay: 1,
       controls: 0 
     },
@@ -41,9 +43,8 @@ export function VideoPreview({ videoId }: VideoPreviewProps){
           </span>
         </div>
       ) : (
-        <div className="rounded-md overflow-hidden">
+        <div className="aspect-video rounded-md overflow-hidden">
           <YouTube
-            id={videoId}
             videoId={videoId}
             onError={onError}
             opts={opts}

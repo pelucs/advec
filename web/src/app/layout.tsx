@@ -23,7 +23,7 @@ export default function RootLayout({
         <link rel="icon" href="../../public/icon.svg"/>
       </Head>
 
-      <body className={`${inter.variable} ${baijamjuree.variable} font-sans text-sm`}>
+      <body className={`${inter.variable} ${baijamjuree.variable} font-sans text-sm antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

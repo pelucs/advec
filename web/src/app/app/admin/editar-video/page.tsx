@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Header } from "../../header";
 import { Sidebar } from "../../sidebar";
 import { VideoPreview } from "../video-preview";
-import { FormCreateNewVideo } from "./form-create-new-video";
 import { Youtube } from "lucide-react";
+import { FormEditVideo } from "./form-edit-video";
 
 export default () => {
   const [videoId, setVideoId] = useState<string>("");
@@ -19,13 +19,13 @@ export default () => {
 
         <div className="p-7 flex flex-col h-full">
           <div className="flex flex-col">
-            <h1 className="text-3xl font-bold">Novo vídeo</h1>
-            <span className="text-muted-foreground">Informe detalhes do vídeo</span>
+            <h1 className="text-3xl font-bold">Editar vídeo</h1>
+            <span className="text-muted-foreground">Atualize as informações do vídeo</span>
           </div>
 
           <div className="mt-5 grid grid-cols-2 gap-5">
             <div className="p-5 border rounded-md overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
-              <FormCreateNewVideo setVideoId={setVideoId} />
+              <FormEditVideo setVideoId={setVideoId} />
             </div>
 
             {videoId ? (
