@@ -26,7 +26,7 @@ export default () => {
 
             <div className="mt-4 grid grid-cols-3 gap-5">
               {Array.from({ length: 6 }).map((_, i) => (
-                <Link href="" key={i} className="flex flex-col gap-2">
+                <Link href="/app/comunicacao/aulas" key={i} className="flex flex-col gap-2">
                   <div className="rounded-md aspect-video bg-secondary"/>
                   <span className="text-lg">Gravações e edições</span>
                 </Link>

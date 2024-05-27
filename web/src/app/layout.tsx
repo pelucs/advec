@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${baijamjuree.variable} font-sans text-sm antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

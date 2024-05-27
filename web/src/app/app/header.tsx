@@ -1,8 +1,9 @@
-import { ButtonTheme } from "@/components/button-theme";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { ButtonTheme } from "@/components/button-theme";
 import { Search, Upload } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import Link from "next/link";
 
 export function Header(){

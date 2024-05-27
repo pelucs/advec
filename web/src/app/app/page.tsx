@@ -18,7 +18,7 @@ export default () => {
             <span className="text-muted-foreground">
               Seja bem-vindo! 
               <br/>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Antes de começar, confira alguns avisos.
             </span>
           </div>
 
