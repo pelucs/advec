@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 
 import Link from "next/link";
@@ -11,10 +13,18 @@ import {
 } from "lucide-react";
 
 import logoAdvecBranca from '@/assets/logotipo-advec-branca.png';
+import { useState } from "react";
+import clsx from "clsx";
 
 export function Sidebar(){
+
+  const [open, setOpen] = useState<boolean>(true);
+
   return(
-    <div className="w-60 h-screen border-r flex flex-col justify-between sticky top-0 left-0">
+    <div className={clsx("h-screen border-r flex flex-col justify-between sticky top-0 left-0 transition-all", {
+      "w-60": open,
+      "w-16": !open
+    })}>
       <div>
         <div className="h-16 px-3 flex items-center justify-between border-b">
           <Image 
@@ -23,7 +33,12 @@ export function Sidebar(){
             src={logoAdvecBranca} 
           />
 
-          <Button size={"icon"} variant={'secondary'} className="size-8">
+          <Button 
+            size={"icon"} 
+            variant={'secondary'} 
+            className="size-8"
+            onClick={() => setOpen(!open)}
+          >
             <ChevronsLeft className="size-4"/>
           </Button>
         </div>
@@ -32,27 +47,37 @@ export function Sidebar(){
           <span className="text-xs uppercase font-semibold text-muted-foreground">Menu</span>
 
           <nav className="mt-2 space-y-2">
-            <Link 
-              href="/app" 
-              className="py-2 hover:px-3 flex items-center gap-2 rounded hover:bg-secondary transition-all
-              hover:text-orange-500"
+            <Button 
+              asChild 
+              variant="ghost" 
+              className={clsx("w-full py-5 transition-all hover:text-orange-500", {
+                "justify-start gap-2 hover:px-3 px-0": open,
+                "px-0": !open
+              })}
             >
-              <Home className="size-4"/>
+              <Link href="/app">
+                <Home className="w-4 h-4"/>
 
-              Início
-            </Link>
+                {open && "Início"}
+              </Link>
+            </Button>
 
-            <Link 
-              href="/perfil" 
-              className="py-2 hover:px-3 flex items-center gap-2 rounded hover:bg-secondary transition-all
-              hover:text-orange-500"
+            <Button 
+              asChild 
+              variant="ghost" 
+              className={clsx("w-full py-5 transition-all hover:text-orange-500", {
+                "justify-start gap-2 hover:px-3 px-0": open,
+                "px-0": !open
+              })}
             >
-              <User className="size-4"/>
+              <Link href="/app">
+                <User className="size-4"/>
 
-              Perfil
-            </Link>
+                {open && "Perfil"}
+              </Link>
+            </Button>
 
-            <MenuCollapsible/>
+            <MenuCollapsible openSidebar={open}/>
           </nav>
         </div>
       </div>

@@ -3,12 +3,20 @@
 import Link from "next/link";
 import clsx from "clsx";
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible";
-import { ChevronsUpDown, LayoutList } from "lucide-react";
-import { useState } from "react";
 import { Button } from "./ui/button";
+import { useState } from "react";
+import { ChevronsUpDown, ImagePlay, LayoutList } from "lucide-react";
+import { 
+  Collapsible, 
+  CollapsibleContent, 
+  CollapsibleTrigger 
+} from "./ui/collapsible";
 
-export function MenuCollapsible(){
+interface MenuCollapsibleProps {
+  openSidebar: boolean;
+}
+
+export function MenuCollapsible({ openSidebar }: MenuCollapsibleProps){
   
   const [open, setOpen] = useState<boolean>(true);
   
@@ -26,17 +34,21 @@ export function MenuCollapsible(){
           "px-3 bg-secondary": open,
           "hover:px-3": !open
         })}>
-            <div className="flex items-center gap-2">
-              <LayoutList className="size-4"/>
+          <div className="flex items-center gap-2">
+            <LayoutList className="size-4"/>
 
-              Departamentos
-            </div>
+            Departamentos
+          </div>
 
-            <ChevronsUpDown className="size-3"/>
+          <ChevronsUpDown className="size-3"/>
         </CollapsibleTrigger>
       </Button>
 
       <CollapsibleContent className="mt-2 pl-5 transition-all">
+        {!openSidebar && (
+          <hr className="h-5 w-[1px] bg-secondary"/>
+        )}
+
         <div className="border-l pl-2 flex flex-col gap-2">
           <Link 
             href="/app/comunicacao" 
