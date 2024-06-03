@@ -1,7 +1,8 @@
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Upload } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ButtonTheme } from "@/components/button-theme";
-import { Search, Upload } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import Link from "next/link";
@@ -12,18 +13,11 @@ export function Header(){
       <span>Dom, 14/04</span>
 
       <div className="flex items-center gap-4">
-        <div className="h-8 px-3 flex items-center gap-2 border rounded text-xs dark:bg-black">
-          <Search className="size-4 text-muted-foreground"/>
-
-          <input 
-            placeholder="Pesquise um vídeo"
-            className="h-full bg-transparent outline-none"
-          />
-        </div>
+        <Input placeholder="Pesquise um vídeo" className="w-[250px]"/>
 
         <Separator orientation="vertical" className="h-5"/>
         
-        <Button asChild size={"sm"} className="button-theme gap-2 rounded">
+        <Button asChild size={"sm"} className="gap-2">
           <Link href="/app/admin">
             <Upload className="size-4"/>
 

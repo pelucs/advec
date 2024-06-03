@@ -1,20 +1,21 @@
 'use client'
 
+import clsx from "clsx";
 import Image from "next/image";
-
 import Link from "next/link";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MenuCollapsible } from "@/components/menu-collapsible";
 import { 
   ChevronsLeft, 
+  ChevronsRight, 
   Home, 
   User 
 } from "lucide-react";
 
-import logoAdvecBranca from '@/assets/logotipo-advec-branca.png';
-import { useState } from "react";
-import clsx from "clsx";
+import logotipoAdvecBranca from '@/assets/logotipo-advec-branca.png';
+import logoAdvecBranca from '@/assets/logo-advec-branca.png';
 
 export function Sidebar(){
 
@@ -26,20 +27,40 @@ export function Sidebar(){
       "w-16": !open
     })}>
       <div>
-        <div className="h-16 px-3 flex items-center justify-between border-b">
-          <Image 
-            alt=""
-            className="w-40"
-            src={logoAdvecBranca} 
-          />
+        <div className={clsx("px-3 flex items-center gap-1 border-b", {
+          "h-16 flex-row justify-between": open,
+          "h-24 flex-col-reverse justify-center": !open,
+        })}>
+          <div>
+            <Image 
+              alt="Logo Advec"
+              src={logotipoAdvecBranca} 
+              className={clsx("w-[160px] transition-all duration-150", {
+                "flex scale-100": open,
+                "hidden scale-0": !open
+              })}
+            />
+
+            <Image 
+              alt="Logo Advec"
+              className={clsx("w-[350px] transition-all", {
+                "flex scale-100": !open,
+                "hidden scale-0 duration-500": open
+              })}
+              src={logoAdvecBranca} 
+            />
+          </div>
 
           <Button 
             size={"icon"} 
-            variant={'secondary'} 
             className="size-8"
-            onClick={() => setOpen(!open)}
+            variant="secondary" 
+            onClick={() => setOpen(!open)} 
           >
-            <ChevronsLeft className="size-4"/>
+            <ChevronsRight className={clsx("size-4", {
+              "rotate-180": open,
+              "rotate-0": !open
+            })}/>
           </Button>
         </div>
 

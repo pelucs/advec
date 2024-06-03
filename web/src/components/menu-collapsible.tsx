@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { ChevronsUpDown, ImagePlay, LayoutList } from "lucide-react";
+import { ChevronsUpDown, LayoutList } from "lucide-react";
 import { 
   Collapsible, 
   CollapsibleContent, 
@@ -30,17 +30,17 @@ export function MenuCollapsible({ openSidebar }: MenuCollapsibleProps){
         variant={"ghost"}
         className="w-full p-0 transition-all"
       >
-        <CollapsibleTrigger className={clsx("flex items-center justify-between hover:text-orange-500", {
-          "px-3 bg-secondary": open,
-          "hover:px-3": !open
+        <CollapsibleTrigger className={clsx("flex items-center justify-between hover:px-3 hover:text-primary", {
+          "": open && !openSidebar,
+          "": !open && openSidebar
         })}>
           <div className="flex items-center gap-2">
             <LayoutList className="size-4"/>
 
-            Departamentos
+            {openSidebar && "Departamentos"}
           </div>
 
-          <ChevronsUpDown className="size-3"/>
+          {openSidebar && <ChevronsUpDown className="size-3"/>}
         </CollapsibleTrigger>
       </Button>
 
@@ -49,7 +49,7 @@ export function MenuCollapsible({ openSidebar }: MenuCollapsibleProps){
           <hr className="h-5 w-[1px] bg-secondary"/>
         )}
 
-        <div className="border-l pl-2 flex flex-col gap-2">
+        <div className={`${ openSidebar && "border-l pl-2" } flex flex-col gap-2`}>
           <Link 
             href="/app/comunicacao" 
             className="py-2 px-3 rounded hover:bg-secondary transition-colors hover:text-orange-500"
