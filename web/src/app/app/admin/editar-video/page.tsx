@@ -1,14 +1,26 @@
 'use client'
 
-import { useState } from "react";
 import { Header } from "../../header";
-import { Sidebar } from "../../sidebar";
-import { VideoPreview } from "../video-preview";
 import { Youtube } from "lucide-react";
+import { Sidebar } from "../../sidebar";
+import { useState } from "react";
+import { YouTubeProps } from "react-youtube";
+import { VideoPreview } from "../../../../components/video-preview";
 import { FormEditVideo } from "./form-edit-video";
 
 export default () => {
   const [videoId, setVideoId] = useState<string>("");
+
+  const opts: YouTubeProps['opts'] = {
+    width: '1100',
+    height: '624',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      showinfo: 0,
+      autoplay: 1,
+      controls: 0 
+    },
+  }
 
   return (
     <div className="flex items-start h-screen">
@@ -29,7 +41,9 @@ export default () => {
             </div>
 
             {videoId ? (
-              <VideoPreview videoId={videoId} />
+              <div className="rounded-md overflow-hidden">
+                <VideoPreview opts={opts} videoId={videoId} />
+              </div>
             ) : (
               <div className="aspect-video flex items-center justify-center bg-secondary rounded-md">
                 <span className="py-3 px-4 flex items-center justify-center gap-2 border border-dashed 

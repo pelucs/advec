@@ -1,0 +1,10 @@
+query GetClassBySlug($slug: String!) {
+  class(where: { slug: $slug }) {
+    name
+    slug
+    teacher
+    videoId
+    description
+    complementaryMaterial
+  }
+}

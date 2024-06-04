@@ -1,10 +1,17 @@
-import { Library } from "lucide-react";
-import { Header } from "../header";
-import { Sidebar } from "../sidebar";
+"use client"
 
-import Link from "next/link";
+import { Header } from "../header";
+import { client } from "@/lib/apollo";
+import { Library } from "lucide-react";
+import { Sidebar } from "../sidebar";
+import { ListOfModules } from "./list-of-modules";
+import { ApolloProvider } from "@apollo/client";
+import { useParams } from "next/navigation";
 
 export default () => {
+
+  const { departament } = useParams<{ departament: string }>();
+
   return(
     <div className="flex items-start">
       <Sidebar/>
@@ -14,7 +21,7 @@ export default () => {
 
         <div className="p-7">
           <div className="flex flex-col">
-            <h1 className="text-3xl font-bold">Comunicação</h1>
+            <h1 className="text-3xl font-bold">{departament}</h1>
             <span className="text-muted-foreground">Aulas de treinamento</span>
           </div>
 
@@ -26,12 +33,9 @@ export default () => {
             </h1>
 
             <div className="mt-4 grid grid-cols-3 gap-5">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <Link href="/app/comunicacao/aulas" key={i} className="flex flex-col gap-2">
-                  <div className="rounded-md aspect-video bg-secondary"/>
-                  <span className="text-lg">Gravações e edições</span>
-                </Link>
-              ))}
+              <ApolloProvider client={client}>
+                <ListOfModules departament={departament}/>
+              </ApolloProvider>
             </div>
           </div>
         </div>

@@ -8,7 +8,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MenuCollapsible } from "@/components/menu-collapsible";
 import { 
-  ChevronsLeft, 
   ChevronsRight, 
   Home, 
   User 
@@ -22,7 +21,7 @@ export function Sidebar(){
   const [open, setOpen] = useState<boolean>(true);
 
   return(
-    <div className={clsx("h-screen border-r flex flex-col justify-between sticky top-0 left-0 transition-all", {
+    <div className={clsx("h-screen border-r hidden md:flex flex-col justify-between sticky top-0 left-0 transition-all", {
       "w-60": open,
       "w-16": !open
     })}>

@@ -1,0 +1,6 @@
+query GetClassesByModule($slug: String!) {
+  classes(where: { module: {slug: $slug} }) {
+    name
+    slug
+  }
+}
