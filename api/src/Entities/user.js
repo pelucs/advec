@@ -19,6 +19,53 @@ class User {
     setPassword(password) { this.password = password; }
     setTypeAdmin() { this.type = 'admin'; }
     setTypeUser() { this.type = 'user'; }
+
+    toPrisma() {
+        return {
+            id: this.getId(),
+            name: this.getName(),
+            email: this.getEmail(),
+            password: this.getPassword(),
+            type: this.getType()
+        }
+    }
 }
 
-module.exports = User;
+class UserBuilder {
+    constructor() {
+        this.id = "";
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.type = 'user';
+    }
+
+    id(id) {
+        this.id = id;
+        return this;
+    }
+
+    name(name) {
+        this.name = name;
+        return this;
+    }
+
+    email(email) {
+        this.email = email;
+        return this;
+    }
+
+    password(password) {
+        this.password = password;
+        return this;
+    }
+
+    type(type) {
+        this.type = type;
+        return this;
+    }
+
+    build() { return new User(this); }
+}
+
+module.exports = { User, UserBuilder };

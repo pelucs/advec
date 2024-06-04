@@ -1,11 +1,14 @@
 const UserAlreadyExistsError = require("../../Exceptions/User/UserAlreadyExistsError");
 const UserMemoryRepository = require("../../Repositories/userMemoryRepository");
 const TokenBlackListRepository = require("../../Repositories/tokenBlackListRepository");
+const UserDoesntExistsError = require("../../Exceptions/User/UserDoesntExistsError");
+const PrismaUserRepository = require("../../Repositories/PrismaUserRepository");
+const PrismaTokenBlackListRepository = require("../../Repositories/PrismaTokenBlackListRepository");
 
 class UserService {
     constructor() {
-        this.userRepository = new UserMemoryRepository();
-        this.tokenBlackList = new TokenBlackListRepository();
+        this.userRepository = new PrismaUserRepository();
+        this.tokenBlackList = new PrismaTokenBlackListRepository();
     }
 
     async createUser(user) {
@@ -18,7 +21,10 @@ class UserService {
     }
 
     async getUserByEmail(email) {
-        return await this.userRepository.getByEmail(email);
+        const user = await this.userRepository.getByEmail(email);
+        console.log("user no service", user);
+        if (!user) throw new UserDoesntExistsError();
+        return user;
     }
 
     async userAlreadyExists(email) {
