@@ -34,6 +34,6 @@ model UserDepartment {
 
 model TokenBlackList {
   id        String   @id @default(uuid())
-  token     String   @unique @db.VarChar(255)
+  token     String   @unique @db.VarChar(267)
   createdAt DateTime @default(now())
 }

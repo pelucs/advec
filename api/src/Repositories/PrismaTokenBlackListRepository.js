@@ -4,14 +4,14 @@ class PrismaTokenBlackListRepository {
 
     async set(token) {
         await prisma.tokenBlackList.create({
-            data: token
+            data: { token }
         });
         return token;
     }
 
     async delete(token) {
         await prisma.tokenBlackList.delete({
-            where: token
+            where: { token }
         })
     }
 
@@ -22,7 +22,7 @@ class PrismaTokenBlackListRepository {
     async IsTokenInBlackList(token) {
         const blackListedToken = await prisma
         .tokenBlackList.findUnique({
-            where: token
+            where: { token }
         });
 
         return blackListedToken !== null;
