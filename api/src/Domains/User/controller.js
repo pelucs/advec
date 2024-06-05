@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const userService = require("./service");
-const { User } = require("../../Entities/user");
+const { UserBuilder } = require("../../Entities/user");
 const UserValidationError = require("../../Exceptions/User/UserValidationError");
 const { JWTSECRET, tokenExpireTime } = require("../../Constants/tokenSecret");
 const { v4 } = require("uuid");
@@ -12,8 +12,12 @@ class UserController {
         try {
             const { name, email, password } = request.body;
 
-            const user = new User({ name, email, password });
-            user.setId(v4());
+            const user = new UserBuilder()
+                .setId(v4())
+                .setName(name)
+                .setEmail(email)
+                .setPassword(password)
+                .build();
 
             const userResult = await userService.createUser(user);
 

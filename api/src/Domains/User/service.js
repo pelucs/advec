@@ -22,7 +22,6 @@ class UserService {
 
     async getUserByEmail(email) {
         const user = await this.userRepository.getByEmail(email);
-        console.log("user no service", user);
         if (!user) throw new UserDoesntExistsError();
         return user;
     }

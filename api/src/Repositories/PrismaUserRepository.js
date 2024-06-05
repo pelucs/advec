@@ -4,7 +4,6 @@ const { UserBuilder } = require("../Entities/user");
 
 class PrismaUserRepository {
     async set(user) {
-        console.log(user.toPrisma());
         await prisma.user.create({
             data: user.toPrisma()
         });
@@ -24,13 +23,15 @@ class PrismaUserRepository {
 
         if (!row) return null;
 
-        return new UserBuilder()
-            .id(row.id)
-            .name(row.name)
-            .email(row.email)
-            .password(row.password)
-            .type(row.type)
-            .build()
+        const user = new UserBuilder()
+            .setId(row.id)
+            .setName(row.name)
+            .setEmail(row.email)
+            .setPassword(row.password)
+            .setType(row.type)
+            .build();
+            
+        return user;
     }
     
     async getAll() {

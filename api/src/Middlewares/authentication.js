@@ -11,7 +11,6 @@ async function validateUser(request, response, next) {
         const { email, password } = request.body;
 
         const user = await userService.getUserByEmail(email);
-        console.log(user);
 
         if (!user || user.getPassword() !== password) {
             throw new UserPasswordIsIncorrectError();

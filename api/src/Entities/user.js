@@ -1,10 +1,10 @@
 class User {
-    constructor({name, email, password}) {
-        this.id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.type = 'user';
+    constructor(builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.email = builder.email;
+        this.password = builder.password;
+        this.type = builder.type;
     }
 
     getId() { return this.id; }
@@ -22,11 +22,11 @@ class User {
 
     toPrisma() {
         return {
-            id: this.getId(),
-            name: this.getName(),
-            email: this.getEmail(),
-            password: this.getPassword(),
-            type: this.getType()
+            id: this.id,
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            type: this.type
         }
     }
 }
@@ -37,30 +37,30 @@ class UserBuilder {
         this.name = "";
         this.email = "";
         this.password = "";
-        this.type = 'user';
+        this.type = "user";
     }
 
-    id(id) {
+    setId(id) {
         this.id = id;
         return this;
     }
 
-    name(name) {
+    setName(name) {
         this.name = name;
         return this;
     }
 
-    email(email) {
+    setEmail(email) {
         this.email = email;
         return this;
     }
 
-    password(password) {
+    setPassword(password) {
         this.password = password;
         return this;
     }
 
-    type(type) {
+    setType(type) {
         this.type = type;
         return this;
     }
