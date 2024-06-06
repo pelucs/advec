@@ -19,7 +19,7 @@ export default () => {
       <div className="flex-1">
         <Header/>
 
-        <div className="p-7">
+        <div className="p-5 md:p-7">
           <div className="flex flex-col">
             <h1 className="text-3xl font-bold">{departament}</h1>
             <span className="text-muted-foreground">Aulas de treinamento</span>
@@ -32,7 +32,7 @@ export default () => {
               Módulos
             </h1>
 
-            <div className="mt-4 grid grid-cols-3 gap-5">
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
               <ApolloProvider client={client}>
                 <ListOfModules departament={departament}/>
               </ApolloProvider>

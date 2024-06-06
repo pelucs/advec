@@ -41,11 +41,11 @@ export function ClassPanel({ module }: ClassPanelProps) {
         </div>
       </div>
 
-      <div className="block md:hidden px-7">
+      <div className="block md:hidden px-5 md:px-7">
         <Separator orientation="horizontal"/>
       </div>
 
-      <div className="py-7 px-7">
+      <div className="p-5 md:p-7">
         <div>
           <h1 className="text-2xl font-bold leading-tight">
             {data.class.name}
@@ -74,7 +74,11 @@ export function ClassPanel({ module }: ClassPanelProps) {
 
         <div className="mt-10 grid grid-cols-2 gap-4">
           {data.class.complementaryMaterial && (
-            <Button asChild variant={"outline"} className="h-16 gap-2 text-lg">
+            <Button 
+              asChild 
+              variant={"outline"} 
+              className="h-16 gap-2 text-lg rounded-lg"
+            >
               <a target="_blank" href={data.class.complementaryMaterial}>
                 <Book className="size-6"/>
 

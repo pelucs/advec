@@ -4,12 +4,22 @@ import clsx from "clsx";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PanelLeftOpen, PlayCircle } from "lucide-react";
+import { ListVideo, PanelBottomOpen, PanelLeftOpen, PlayCircle } from "lucide-react";
 import { useGetClassesByModuleQuery } from "@/graphql/generated";
 
 interface ListOfClassesProps {
   style: "desktop" | "mobile";
   module: string;
+}
+
+interface ListOfClassesForStyles {
+  module: string;
+  open: boolean;
+  setOpen: (newState: boolean) => void;
+  data: {
+    name: string;
+    slug: string;
+  }[]
 }
 
 export function ListOfClasses({ module, style }: ListOfClassesProps) {
@@ -29,31 +39,61 @@ export function ListOfClasses({ module, style }: ListOfClassesProps) {
   }
 
   return(
-    <div className={clsx("py-7 px-5 md:pl-7 md:px-2 md:border-l", {
-      "w-[340px] h-[calc(100vh-64px)]": style === "desktop",
-      "flex-1 h-fit": style === "mobile"
-    })}>
-      <div className="h-full pr-3 flex flex-col gap-4 overflow-y-auto">
-        <div className="p-3 md:p-0 flex items-center justify-between rounded bg-secondary/50 md:bg-transparent">
-          <h1 className="text-xl font-semibold">Conteúdos</h1>
+    <div>
+      {
+        style === "desktop" ? 
+          <ListOfClassesForDesktop 
+            module={module}
+            open={open} 
+            setOpen={setOpen} 
+            data={data.classes}
+          /> 
+        : 
+          <ListOfClassesForMobile
+            module={module}
+            open={open} 
+            setOpen={setOpen} 
+            data={data.classes}
+          />
+      }
+    </div>
+  );
+}
 
-          <Button onClick={() => setOpen(!open)} variant={"secondary"} size={"icon"}>
-            <PanelLeftOpen 
-              className={`size-4 transition-all ${open ? "-rotate-90 md:rotate-0" : "rotate-90 md:rotate-180"}`}
-            />
-          </Button>
-        </div>
+// Para desktops
+export function ListOfClassesForDesktop({ module, open, setOpen, data }: ListOfClassesForStyles) {
+  return(
+    <div 
+      className={clsx("h-[calc(100vh-64px)] border-l flex flex-col gap-4 transition-all", {
+        "w-[340px] p-5": open,
+        "w-16 py-5 items-center": !open
+      })}
+    >
+      
+      {/* Botão */}
+      <div className="flex items-center justify-between rounded-md bg-secondary/50 md:bg-transparent">
+        { open && <h1 className="text-xl font-semibold">Conteúdos</h1> }
 
-        <div className={clsx("flex flex-col gap-4", {
-          "h-fit overflow-y-auto": open,
-          "h-0 overflow-hidden": !open
-        })}>
-          {data.classes.map(classModule => (
+        <Button 
+          size={"icon"}
+          variant={"secondary"} 
+          onClick={() => setOpen(!open)} 
+        >
+          <PanelLeftOpen 
+            className={`size-4 transition-all ${ open ? "rotate-0" : "rotate-180" }`}
+          />
+        </Button>
+      </div>
+
+      {/* Aulas */}
+      {open && (
+        <div className="md:pr-2 flex flex-col gap-4 overflow-y-auto">
+          {data.map(classModule => (
             <Button 
               asChild
               variant={"outline"} 
               key={classModule.slug}
-              className="w-full h-fit py-3 flex flex-col items-start gap-2"
+              className="w-full h-fit py-3 flex flex-col items-start gap-2 rounded-lg"
             >
               <Link href={`/app/comunicacao/${module}/${classModule.slug}`}>
                 <h1 className="text-wrap text-base">
@@ -69,6 +109,53 @@ export function ListOfClasses({ module, style }: ListOfClassesProps) {
             </Button>
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+// Para celulares
+export function ListOfClassesForMobile({ module, open, setOpen, data }: ListOfClassesForStyles) {
+  return(
+    <div className="w-full p-5 md:p-7 flex flex-col gap-4">
+      <Button 
+        variant={"secondary"} 
+        onClick={() => setOpen(!open)} 
+        className="w-full h-14 justify-between"
+      >
+        <h1 className="ml-1 md:m-0 text-xl font-semibold">Conteúdos</h1>
+
+        <span>
+          <PanelBottomOpen 
+            className={`size-5 transition-all ${ open ? "rotate-0" : "rotate-180" }`}
+          />
+        </span>
+      </Button>
+
+      <div className={clsx("border rounded-md overflow-hidden divide-y-[1px]", {
+        "block": open,
+        "hidden": !open
+      })}>
+        {data.map(classModule => (
+          <Button 
+            asChild
+            variant={"ghost"} 
+            key={classModule.slug}
+            className="w-full h-fit py-3 flex flex-col items-start gap-2 rounded-none"
+          >
+            <Link href={`/app/comunicacao/${module}/${classModule.slug}`}>
+              <h1 className="text-wrap text-base">
+                {classModule.name}
+              </h1>
+
+              <span className="flex items-center gap-1 text-muted-foreground">
+                <PlayCircle className="size-4"/>
+
+                Assistir aula
+              </span>
+            </Link>
+          </Button>
+        ))}
       </div>
     </div>
   );

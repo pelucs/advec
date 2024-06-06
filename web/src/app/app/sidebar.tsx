@@ -10,6 +10,7 @@ import { MenuCollapsible } from "@/components/menu-collapsible";
 import { 
   ChevronsRight, 
   Home, 
+  Landmark, 
   User 
 } from "lucide-react";
 
@@ -79,6 +80,21 @@ export function Sidebar(){
                 <Home className="w-4 h-4"/>
 
                 {open && "Início"}
+              </Link>
+            </Button>
+
+            <Button 
+              asChild 
+              variant="ghost" 
+              className={clsx("w-full py-5 transition-all hover:text-orange-500", {
+                "justify-start gap-2 hover:px-3 px-0": open,
+                "px-0": !open
+              })}
+            >
+              <Link href="/nossos-pilares">
+                <Landmark className="w-4 h-4"/>
+
+                {open && "Nossos pilares"}
               </Link>
             </Button>
 

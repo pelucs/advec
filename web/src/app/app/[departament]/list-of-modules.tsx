@@ -40,7 +40,7 @@ export function ListOfModules({ departament }: ListOfModulesProps) {
           </div>
           
           <div className="flex flex-col gap-1">
-            <span className="text-lg">{module.name}</span>
+            <span className="text-lg leading-tight">{module.name}</span>
             <span className="w-fit py-1 px-2 rounded text-sm text-muted-foreground bg-secondary">
               {module.classes.length > 1 ? `${module.classes.length} aulas` : `${module.classes.length} aula`}
             </span>
