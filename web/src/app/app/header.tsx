@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Upload } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { LayoutGrid } from "lucide-react";
 import { ButtonTheme } from "@/components/button-theme";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -28,7 +28,7 @@ export function Header(){
       </div>
 
       <div className="flex items-center gap-2 md:gap-4">
-        <div className="hidden md:flex">
+        <div className="hidden md:flex md:items-center">
           <Input 
             placeholder="Pesquise um vídeo" 
             className="w-[250px]"
@@ -36,7 +36,7 @@ export function Header(){
 
           <Separator 
             orientation="vertical" 
-            className="h-5"
+            className="h-5 ml-4"
           />
         </div>
         
@@ -47,9 +47,9 @@ export function Header(){
             className="gap-2 hidden md:flex"
           >
             <Link href="/app/admin">
-              <Upload className="size-4"/>
+              <LayoutGrid className="size-4"/>
 
-              Upload Vídeo
+              Dashboard
             </Link>
           </Button>
 
@@ -59,7 +59,7 @@ export function Header(){
             className="size-8 gap-2 md:hidden"
           >
             <Link href="/app/admin">
-              <Upload className="size-4"/>
+              <LayoutGrid className="size-4"/>
             </Link>
           </Button>
         </div>

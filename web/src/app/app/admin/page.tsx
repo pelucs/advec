@@ -1,10 +1,7 @@
-import { Search } from "lucide-react";
 import { Header } from "../header";
 import { Sidebar } from "../sidebar";
-import { Button } from "@/components/ui/button";
+import { ListOfVolunteers } from "./list-of-volunteers";
 import { TablePublishedVideos } from "./table-published-videos";
-import Link from "next/link";
-import { Input } from "@/components/ui/input";
 
 export default () => {
   return(
@@ -14,30 +11,15 @@ export default () => {
       <div className="flex-1">
         <Header/>
 
-        <div className="p-7">
+        <div className="p-5 md:p-7">
           <div className="flex flex-col">
             <h1 className="text-3xl font-bold">Área admin</h1>
             <span className="text-muted-foreground">Ferramentas exclusivas para administradores</span>
           </div>
 
-          <div className="mt-8">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <h1>
-                  Vídeos publicados
-                </h1>
-                
-                <Input className="w-[250px]" placeholder="Pesquise um vídeo"/>
-              </div>
-
-              <Button asChild size={"sm"}>
-                <Link href="/app/admin/novo-video">
-                  + Add Vídeo
-                </Link>
-              </Button>
-            </div>
-
+          <div className="mt-8 space-y-5">
             <TablePublishedVideos/>
+            <ListOfVolunteers/>
           </div>
         </div>
       </div>
