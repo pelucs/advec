@@ -1,30 +1,18 @@
 'use client'
 
 import { Header } from "../../header";
-import { Sidebar } from "../../sidebar";
+import { Menu } from "../../menu";
 import { Youtube } from "lucide-react";
 import { useState } from "react";
 import { VideoPreview } from "../../../../components/video-preview";
-import { YouTubeProps } from "react-youtube";
 import { FormCreateNewVideo } from "./form-create-new-video";
 
 export default () => {
   const [videoId, setVideoId] = useState<string>("");
 
-  const opts: YouTubeProps['opts'] = {
-    width: '1100',
-    height: '624',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      showinfo: 0,
-      autoplay: 1,
-      controls: 0 
-    },
-  }
-
   return (
     <div className="flex items-start h-screen">
-      <Sidebar />
+      <Menu style="desktop"/>
 
       <div className="flex-1">
         <Header />
@@ -42,7 +30,7 @@ export default () => {
 
             {videoId ? (
               <div className="rounded-md overflow-hidden">
-                <VideoPreview opts={opts} videoId={videoId} />
+                <VideoPreview videoId={videoId} />
               </div>
             ) : (
               <div className="aspect-video flex items-center justify-center bg-secondary rounded-md">

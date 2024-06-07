@@ -61,7 +61,7 @@ export function ListOfClasses({ module, style }: ListOfClassesProps) {
 }
 
 // Para desktops
-export function ListOfClassesForDesktop({ module, open, setOpen, data }: ListOfClassesForStyles) {
+function ListOfClassesForDesktop({ module, open, setOpen, data }: ListOfClassesForStyles) {
   return(
     <div 
       className={clsx("h-[calc(100vh-64px)] border-l flex flex-col gap-4 transition-all", {
@@ -115,7 +115,7 @@ export function ListOfClassesForDesktop({ module, open, setOpen, data }: ListOfC
 }
 
 // Para celulares
-export function ListOfClassesForMobile({ module, open, setOpen, data }: ListOfClassesForStyles) {
+function ListOfClassesForMobile({ module, open, setOpen, data }: ListOfClassesForStyles) {
   return(
     <div className="w-full p-5 md:p-7 flex flex-col gap-4">
       <Button 

@@ -3,7 +3,7 @@
 import { Header } from "../header";
 import { client } from "@/lib/apollo";
 import { Library } from "lucide-react";
-import { Sidebar } from "../sidebar";
+import { Menu } from "../menu";
 import { ListOfModules } from "./list-of-modules";
 import { ApolloProvider } from "@apollo/client";
 import { useParams } from "next/navigation";
@@ -14,7 +14,7 @@ export default () => {
 
   return(
     <div className="flex items-start">
-      <Sidebar/>
+      <Menu style="desktop"/>
 
       <div className="flex-1">
         <Header/>

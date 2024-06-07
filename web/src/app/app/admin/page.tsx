@@ -1,12 +1,12 @@
 import { Header } from "../header";
-import { Sidebar } from "../sidebar";
+import { Menu } from "../menu";
 import { ListOfVolunteers } from "./list-of-volunteers";
 import { TablePublishedVideos } from "./table-published-videos";
 
 export default () => {
   return(
     <div className="flex items-start">
-      <Sidebar/>
+      <Menu style="desktop"/>
 
       <div className="flex-1">
         <Header/>

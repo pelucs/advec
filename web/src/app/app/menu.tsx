@@ -3,34 +3,50 @@
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
+import logoAdvecBranca from '@/assets/logo-advec-branca.png';
+import logotipoAdvecBranca from '@/assets/logotipo-advec-branca.png';
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MenuCollapsible } from "@/components/menu-collapsible";
+import { useState } from "react";
 import { 
   ChevronsRight, 
+  HeartHandshake, 
   Home, 
+  Images, 
   Landmark, 
-  User 
+  User,
+  Menu as MenuIcon
 } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
-import logotipoAdvecBranca from '@/assets/logotipo-advec-branca.png';
-import logoAdvecBranca from '@/assets/logo-advec-branca.png';
+interface MenuProps {
+  style: "desktop" | "mobile";
+}
+interface MenuForStyle {
+  open: boolean;
+  setOpen: (newState: boolean) => void;
+}
 
-export function Sidebar(){
+export function Menu({ style }: MenuProps){
 
   const [open, setOpen] = useState<boolean>(true);
 
   return(
-    <div className={clsx("h-screen border-r hidden md:flex flex-col justify-between sticky top-0 left-0 transition-all", {
-      "w-60": open,
-      "w-16": !open
-    })}>
+    <div className={style === "desktop" ? "sticky top-0 left-0" : ""}>
+      {style === "desktop" ? (
+        <MenuDesktop open={open} setOpen={setOpen}/>
+      ) : (
+        <MenuMobile open={open} setOpen={setOpen}/>
+      )}
+    </div>
+  );
+}
+
+function MenuDesktop({ open, setOpen }: MenuForStyle) {
+  return(
+    <div className="w-60 h-screen border-r hidden md:flex flex-col justify-between transition-all">
       <div>
-        <div className={clsx("px-3 flex items-center gap-1 border-b", {
-          "h-16 flex-row justify-between": open,
-          "h-24 flex-col-reverse justify-center": !open,
-        })}>
+        <div className="h-16 px-3 flex items-center justify-between border-b">
           <div>
             <Image 
               alt="Logo Advec"
@@ -65,9 +81,9 @@ export function Sidebar(){
         </div>
 
         <div className="px-3 py-4">
-          <span className="text-xs uppercase font-semibold text-muted-foreground">Menu</span>
+          <span className="mt-2 block text-xs uppercase font-semibold text-muted-foreground">Menu</span>
 
-          <nav className="mt-2 space-y-2">
+          <nav className="mt-2">
             <Button 
               asChild 
               variant="ghost" 
@@ -112,8 +128,40 @@ export function Sidebar(){
                 {open && "Perfil"}
               </Link>
             </Button>
+          </nav>
 
-            <MenuCollapsible openSidebar={open}/>
+          <span className="mt-4 block text-xs uppercase font-semibold text-muted-foreground">Departamentos</span>
+
+          <nav className="mt-2">
+            <Button 
+              asChild 
+              variant="ghost" 
+              className={clsx("w-full py-5 transition-all hover:text-orange-500", {
+                "justify-start gap-2 hover:px-3 px-0": open,
+                "px-0": !open
+              })}
+            >
+              <Link href="/app">
+                <Images className="w-4 h-4"/>
+
+                {open && "Comunicação"}
+              </Link>
+            </Button>
+
+            <Button 
+              asChild 
+              variant="ghost" 
+              className={clsx("w-full py-5 transition-all hover:text-orange-500", {
+                "justify-start gap-2 hover:px-3 px-0": open,
+                "px-0": !open
+              })}
+            >
+              <Link href="/app">
+                <HeartHandshake className="w-4 h-4"/>
+
+                {open && "UNA"}
+              </Link>
+            </Button>
           </nav>
         </div>
       </div>
@@ -123,6 +171,32 @@ export function Sidebar(){
           Encerrar sessão
         </Button>
       </div>
+    </div>
+  );
+}
+
+function MenuMobile({ open, setOpen }: MenuForStyle) {
+  return(
+    <div className="block md:hidden">
+      <Popover>
+        <Button 
+          asChild
+          size={"icon"} 
+          variant={"secondary"}
+        >
+          <PopoverTrigger>
+            <MenuIcon className="size-4"/>
+          </PopoverTrigger>
+        </Button>
+
+        <PopoverContent align="start">
+          <nav>
+            <Link href="">
+              Início
+            </Link>
+          </nav>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Header } from "../header";
 import { Button } from "@/components/ui/button";
-import { Sidebar } from "../sidebar";
+import { Menu } from "../menu";
 import { AlertTriangle } from "lucide-react";
 
 import Image from "next/image";
@@ -9,7 +9,7 @@ import { departaments } from "@/utils/departaments";
 export default () => {
   return(
     <div className="flex items-start">
-      <Sidebar/>
+      <Menu style="desktop"/>
 
       <div className="flex-1">
         <Header/>

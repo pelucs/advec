@@ -9,11 +9,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 import logoAdvecBranca from '@/assets/logo-advec-branca.png';
+import { Menu } from "./menu";
 
 export function Header(){
   return(
     <div className="w-full h-16 px-5 border-b flex items-center justify-between">
-      <div className="h-full flex items-center justify-center">
+      <div className="h-full flex items-center justify-center gap-4">
         <span className="hidden md:block">
           Dom, 14/04
         </span>
@@ -25,6 +26,8 @@ export function Header(){
             src={logoAdvecBranca} 
           />
         </Link>
+
+        <Menu style="mobile"/>
       </div>
 
       <div className="flex items-center gap-2 md:gap-4">
