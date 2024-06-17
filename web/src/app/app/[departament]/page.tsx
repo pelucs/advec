@@ -1,16 +1,18 @@
 "use client"
 
+import { Menu } from "../menu";
 import { Header } from "../header";
 import { client } from "@/lib/apollo";
 import { Library } from "lucide-react";
-import { Menu } from "../menu";
+import { useParams } from "next/navigation";
+import { departaments } from "@/utils/departaments";
 import { ListOfModules } from "./list-of-modules";
 import { ApolloProvider } from "@apollo/client";
-import { useParams } from "next/navigation";
 
 export default () => {
 
   const { departament } = useParams<{ departament: string }>();
+  const currentDepartament = departaments.find(d => d.slug === departament);
 
   return(
     <div className="flex items-start">
@@ -21,7 +23,9 @@ export default () => {
 
         <div className="p-5 md:p-7">
           <div className="flex flex-col">
-            <h1 className="text-3xl font-bold">{departament}</h1>
+            <h1 className="text-3xl font-bold">
+              {currentDepartament?.name}
+            </h1>
             <span className="text-muted-foreground">Aulas de treinamento</span>
           </div>
 

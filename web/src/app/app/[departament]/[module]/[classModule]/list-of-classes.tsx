@@ -1,18 +1,18 @@
+import clsx from "clsx";
 import Link from "next/link";
 
-import clsx from "clsx";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ListVideo, PanelBottomOpen, PanelLeftOpen, PlayCircle } from "lucide-react";
+import { useParams } from "next/navigation";
 import { useGetClassesByModuleQuery } from "@/graphql/generated";
-
+import { PanelBottomOpen, PanelLeftOpen, PlayCircle } from "lucide-react";
 interface ListOfClassesProps {
   style: "desktop" | "mobile";
   module: string;
 }
-
 interface ListOfClassesForStyles {
+  departament: string;
   module: string;
   open: boolean;
   setOpen: (newState: boolean) => void;
@@ -24,6 +24,7 @@ interface ListOfClassesForStyles {
 
 export function ListOfClasses({ module, style }: ListOfClassesProps) {
 
+  const { departament } = useParams<{ departament: string }>();
   const [open, setOpen] = useState<boolean>(true);
 
   const { data } = useGetClassesByModuleQuery({
@@ -40,28 +41,28 @@ export function ListOfClasses({ module, style }: ListOfClassesProps) {
 
   return(
     <div>
-      {
-        style === "desktop" ? 
-          <ListOfClassesForDesktop 
-            module={module}
-            open={open} 
-            setOpen={setOpen} 
-            data={data.classes}
-          /> 
-        : 
-          <ListOfClassesForMobile
-            module={module}
-            open={open} 
-            setOpen={setOpen} 
-            data={data.classes}
-          />
-      }
+      {style === "desktop" ? 
+        <ListOfClassesForDesktop 
+          departament={departament}
+          module={module}
+          open={open} 
+          setOpen={setOpen} 
+          data={data.classes}
+        /> 
+      : 
+        <ListOfClassesForMobile
+          departament={departament}
+          module={module}
+          open={open} 
+          setOpen={setOpen} 
+          data={data.classes}
+        />}
     </div>
   );
 }
 
 // Para desktops
-function ListOfClassesForDesktop({ module, open, setOpen, data }: ListOfClassesForStyles) {
+function ListOfClassesForDesktop({ departament, module, open, setOpen, data }: ListOfClassesForStyles) {
   return(
     <div 
       className={clsx("h-[calc(100vh-64px)] border-l flex flex-col gap-4 transition-all", {
@@ -95,7 +96,7 @@ function ListOfClassesForDesktop({ module, open, setOpen, data }: ListOfClassesF
               key={classModule.slug}
               className="w-full h-fit py-3 flex flex-col items-start gap-2 rounded-lg"
             >
-              <Link href={`/app/comunicacao/${module}/${classModule.slug}`}>
+              <Link href={`/app/${departament}/${module}/${classModule.slug}`}>
                 <h1 className="text-wrap text-base">
                   {classModule.name}
                 </h1>
@@ -115,7 +116,7 @@ function ListOfClassesForDesktop({ module, open, setOpen, data }: ListOfClassesF
 }
 
 // Para celulares
-function ListOfClassesForMobile({ module, open, setOpen, data }: ListOfClassesForStyles) {
+function ListOfClassesForMobile({ departament, module, open, setOpen, data }: ListOfClassesForStyles) {
   return(
     <div className="w-full p-5 md:p-7 flex flex-col gap-4">
       <Button 
@@ -143,7 +144,7 @@ function ListOfClassesForMobile({ module, open, setOpen, data }: ListOfClassesFo
             key={classModule.slug}
             className="w-full h-fit py-3 flex flex-col items-start gap-2 rounded-none"
           >
-            <Link href={`/app/comunicacao/${module}/${classModule.slug}`}>
+            <Link href={`/app/${departament}/${module}/${classModule.slug}`}>
               <h1 className="text-wrap text-base">
                 {classModule.name}
               </h1>

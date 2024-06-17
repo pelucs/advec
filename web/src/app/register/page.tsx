@@ -2,11 +2,11 @@ import Image from "next/image";
 import logotipoBranca from '@/assets/logotipo-advec-branca.png';
 import logoAnoDeServir from '@/assets/logo-ano-de-servir.svg';
 
-import { LoginForm } from "@/components/login-form";
+import { RegisterForm } from "@/components/register-form";
 
 export default function Home() {
   return (
-    <main className="min-h-screen grid grid-cols-2">
+    <main className="min-h-screen grid grid-cols-1 md:grid-cols-2">
 
       {/* Left */}
       <div className="flex flex-col gap-4 items-center justify-center bg-orange-500">
@@ -30,14 +30,14 @@ export default function Home() {
           <Image src={logotipoBranca} alt="" className="w-52"/>
 
           <div>
-            <h1 className="text-3xl font-bold">Efetue seu login</h1>
+            <h1 className="text-3xl font-bold">Crie sua conta</h1>
 
             <p className="w-full max-w-60 mt-1 text-muted-foreground text-sm">
               Área exclusiva para membros da ADVEC Campina Grande
             </p>
           </div>
 
-          <LoginForm/>
+          <RegisterForm/>
         </div>
       </div>
     </main>

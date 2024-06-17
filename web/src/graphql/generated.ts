@@ -2241,6 +2241,7 @@ export type Module = Entity & Node & {
   /** User that created this document */
   createdBy?: Maybe<User>;
   departament?: Maybe<Departament>;
+  description: RichText;
   /** Get the document in other stages */
   documentInStages: Array<Module>;
   /** List of Module versions */
@@ -2354,6 +2355,7 @@ export type ModuleCreateInput = {
   classes?: InputMaybe<ClassCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   departament?: InputMaybe<DepartamentCreateOneInlineInput>;
+  description: Scalars['RichTextAST']['input'];
   name: Scalars['String']['input'];
   slug: Scalars['String']['input'];
   thumb?: InputMaybe<AssetCreateOneInlineInput>;
@@ -2529,6 +2531,7 @@ export enum ModuleOrderByInput {
 export type ModuleUpdateInput = {
   classes?: InputMaybe<ClassUpdateManyInlineInput>;
   departament?: InputMaybe<DepartamentUpdateOneInlineInput>;
+  description?: InputMaybe<Scalars['RichTextAST']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   thumb?: InputMaybe<AssetUpdateOneInlineInput>;
@@ -2552,8 +2555,7 @@ export type ModuleUpdateManyInlineInput = {
 };
 
 export type ModuleUpdateManyInput = {
-  /** No fields in updateMany data input */
-  _?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['RichTextAST']['input']>;
 };
 
 export type ModuleUpdateManyWithNestedWhereInput = {
@@ -5384,7 +5386,7 @@ export type GetModulesByDepartamentQueryVariables = Exact<{
 }>;
 
 
-export type GetModulesByDepartamentQuery = { __typename?: 'Query', modules: Array<{ __typename?: 'Module', name: string, slug: string, thumb?: { __typename?: 'Asset', url: string } | null, classes: Array<{ __typename?: 'Class', name: string }> }> };
+export type GetModulesByDepartamentQuery = { __typename?: 'Query', modules: Array<{ __typename?: 'Module', name: string, slug: string, description: { __typename?: 'RichText', html: string }, thumb?: { __typename?: 'Asset', url: string } | null, classes: Array<{ __typename?: 'Class', name: string }> }> };
 
 
 export const GetClassBySlugDocument = gql`
@@ -5478,6 +5480,9 @@ export const GetModulesByDepartamentDocument = gql`
   modules(where: {departament: {slug: $slug}}) {
     name
     slug
+    description {
+      html
+    }
     thumb {
       url
     }

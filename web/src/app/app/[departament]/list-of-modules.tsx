@@ -25,7 +25,7 @@ export function ListOfModules({ departament }: ListOfModulesProps) {
       {data.modules.map(module => (
         <Link
           key={module.slug} 
-          href={`/app/${departament}/${module.slug}/aulas`} 
+          href={`/app/${departament}/${module.slug}/aulas?desc=${module.description.html}`} 
           className="flex flex-col gap-2"
         >
           <div className="rounded-md aspect-video overflow-hidden bg-secondary">

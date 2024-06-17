@@ -2,6 +2,9 @@ query GetModulesByDepartament($slug: String!) {
   modules(where: { departament: {slug: $slug} }) {
     name
     slug
+    description {
+      html
+    }
     thumb {
       url
     }

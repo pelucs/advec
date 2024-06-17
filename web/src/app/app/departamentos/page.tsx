@@ -1,10 +1,10 @@
+import { Menu } from "../menu";
 import { Header } from "../header";
 import { Button } from "@/components/ui/button";
-import { Menu } from "../menu";
+import { departaments } from "@/utils/departaments";
 import { AlertTriangle } from "lucide-react";
 
 import Image from "next/image";
-import { departaments } from "@/utils/departaments";
 
 export default () => {
   return(
