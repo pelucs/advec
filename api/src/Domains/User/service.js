@@ -27,7 +27,7 @@ class UserService {
     }
 
     async userAlreadyExists(email) {
-        const existingUser = await this.userRepository.getByEmail(email)
+        const existingUser = await this.userRepository.getByEmail(email);
 
         return Boolean(existingUser);
     }

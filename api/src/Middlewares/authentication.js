@@ -35,6 +35,7 @@ async function validateJWT(request, response, next) {
         jwt.verify(token, JWTSECRET, (error, decoded) => {
             if (error) throw new UserJWTIsInvalidError();
 
+            request.userId = decoded.id;
             request.email = decoded.email;
             request.authenticated = true;
             next();
