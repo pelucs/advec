@@ -1,13 +1,16 @@
 class DepartmentRequest {
     constructor(builder) {
         this.id = builder.id;
-        this.userId = builder.userId;
         this.departmentId = builder.departmentId;
+        this.user = builder.user;
     }
 
     getId() { return this.id; }
-    getUserId() { return this.userId; }
     getDepartmentId() { return this.departmentId; }
+    getUser() { return this.user; }
+    getUserId() { return this.user; }
+    getUserName() { return this.user.name; }
+    getUserEmail() { return this.user.email; }
 
     toPrisma() {
         return {

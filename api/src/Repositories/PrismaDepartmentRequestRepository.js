@@ -26,9 +26,38 @@ class PrismaDepartmentRequestRepository {
             .build();
     }
 
+    async findRequest(userId, departmentId) {
+        return await prisma.departmentRequests.findMany({
+            where: {
+                userId,
+                departmentId
+            }
+        })
+    }
+
+    async deleteRequest(userId, departmentId) {
+        await prisma.departmentRequests.deleteMany({
+            where: {
+                userId,
+                departmentId
+            }
+        })
+    }
+
     async getRequestByDepartmentId(departmentId) {
         return await prisma.departmentRequests.findMany({
-            where: { departmentId }
+            where: { departmentId },
+            select: {
+                id: true,
+                departmentId: true,
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true
+                    }
+                }
+            }
         });
     }
 }

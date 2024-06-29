@@ -34,16 +34,15 @@ class UserController {
             const { email }= request.body;
 
             const user = await userService.getUserByEmail(email);
+            const userDepartments = await userService.getUserDepartments(user.getId());
+            user.departments = userDepartments;
+            delete user["password"];
 
             const token = jwt.sign({
-                id: user.getId(),
-                name: user.getName(),
-                email: user.getEmail(),
-                password: user.getPassword(),
-                type: user.getType()
+                id: user.getId()
             }, JWTSECRET, { expiresIn: tokenExpireTime });
 
-            return response.status(200).json({auth: true, token});
+            return response.status(200).json({auth: true, token, user});
         } catch (error) {
             return error instanceof ValidationError ?
                 response.status(400).json({ error: error.message }) :

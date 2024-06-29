@@ -29,6 +29,10 @@ class PrismaDepartmentRepository {
                         userId
                     }
                 }
+            },
+            select: {
+                id: true,
+                name: true
             }
         })
     }

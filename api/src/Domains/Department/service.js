@@ -1,4 +1,5 @@
 const DepartmentDoesntExistsError = require("../../Exceptions/Department/DepartmentDoesntExistsError");
+const DepartmentRequestDoesntExistsError = require("../../Exceptions/Department/DepartmentRequestDoesntExistsError");
 const UserAlreadyInDepartmentError = require("../../Exceptions/Department/UserAlreadyInDepartmentError copy");
 const UserIsNotDepartmentLeaderError = require("../../Exceptions/Department/UserIsNotDepartmentLeaderError");
 const PrismaDepartmentRepository = require("../../Repositories/PrismaDepartmentRepository");
@@ -53,6 +54,16 @@ class DepartmentService {
 
     async listDepartmentRequests(departmentId) {
         return await this.departmentRequestRepository.getRequestByDepartmentId(departmentId);
+    }
+
+    async deleteRequest(userId, departmentId) {
+        return await this.departmentRequestRepository.deleteRequest(userId, departmentId);
+    }
+
+    async requestExists(memberId, departmentId) {
+        const requests = this.departmentRequestRepository.findRequest(memberId, departmentId);
+        if (!requests) throw new DepartmentRequestDoesntExistsError();
+        return Boolean(requests);
     }
 }
 

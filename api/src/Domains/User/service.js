@@ -1,14 +1,14 @@
 const UserAlreadyExistsError = require("../../Exceptions/User/UserAlreadyExistsError");
-const UserMemoryRepository = require("../../Repositories/userMemoryRepository");
-const TokenBlackListRepository = require("../../Repositories/tokenBlackListRepository");
 const UserDoesntExistsError = require("../../Exceptions/User/UserDoesntExistsError");
 const PrismaUserRepository = require("../../Repositories/PrismaUserRepository");
 const PrismaTokenBlackListRepository = require("../../Repositories/PrismaTokenBlackListRepository");
+const PrismaDepartmentRepository = require("../../Repositories/PrismaDepartmentRepository");
 
 class UserService {
     constructor() {
         this.userRepository = new PrismaUserRepository();
         this.tokenBlackList = new PrismaTokenBlackListRepository();
+        this.departmentRepository = new PrismaDepartmentRepository();
     }
 
     async createUser(user) {
@@ -38,6 +38,10 @@ class UserService {
 
     async findTokenInBlackList(token) {
         return await this.tokenBlackList.IsTokenInBlackList(token);
+    }
+
+    async getUserDepartments(userId) {
+        return await this.departmentRepository.getUserDepartments(userId);
     }
 }
 
