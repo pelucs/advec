@@ -11,8 +11,8 @@
   </a>
 </p>
 
-<div style="display: flex; flex-direction: clomun;">
-  <img src="https://i.ibb.co/L55T8R8/image.png" alt="Home Page" >
+<div align="center">
+  <img src="https://i.ibb.co/ngDNs3c/image.png" alt="Home Page" >
   <img src="https://i.ibb.co/NL71xQX/image.png" alt="Video Page" >
 </div>
 
