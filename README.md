@@ -33,24 +33,48 @@ Esta é uma aplicação web que permite aos membros da Assembleia de Deus Vitór
 
 - **Cadastro de Usuário**: Permite criar uma nova conta de usuário.
 - **Login de Usuário**: Permite que um usuário existente faça login.
-- **Logout de Usuário**: Permite que um usuário faça logout.
-- **Gerenciamento de Todo Lists**: Permite criar, ler, atualizar e deletar listas de tarefas.
-- **Gerenciamento de Tasks**: Permite criar, ler, atualizar e deletar tarefas individuais dentro das listas de tarefas.
+- **Associação com departamentos**: Permite o usuário solicitar vínculo com departamentos, o lider terá de aceitar a solicitação e o usuário terá acesso aos conteúdos de aulas daquele departamento
+- **Aulas**: Um usuário poderá acessar todas as vídeo aulas e conteúdos disponíveis de um departamento
 
 ## Instalação
 
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/DESAFIO-CODEX-GRUPO-3/desafio-codex-2024-FRONTEND.git
+    git clone https://github.com/pelucs/advec.git
     ```
-2. Navegue até o diretório do projeto:
+
+## Web
+    
+2. Navegue até o diretório do projeto web:
     ```bash
-    cd desafio-codex-2024-FRONTEND
+    cd web
     ```
 3. Instale as dependências:
     ```bash
     npm install
     ```
+4. Execute a aplicação
+   ```bash
+   npm start
+   ```
+
+## Api
+    
+2. Navegue até o diretório do servidor:
+    ```bash
+    cd api
+    ```
+3. Instale as dependências:
+   
+   Configure o arquivo .env conforme a seção [Configuração](#configuração)
+    ```bash
+    npm install
+    npx prisma migrate dev --name init
+    ```
+5. Execute a aplicação
+   ```bash
+   npm start
+   ```
 
 ## Configuração
 
