@@ -3,7 +3,7 @@
   <img src="https://i.ibb.co/S39DWgL/LOGO-ADVEC-1-1-1.png" alt="Landing page">
 </h1>
 
-<p align="center">Uma plataforma de vídeos para inserir novos membros nas atividades da igreja Assembleia de Deus Vitória em Cristo</p>
+<p align="center">Uma plataforma de vídeos para inserir novos membros nas atividades da igreja Assembleia de Deus Vitória em Cristo de Campina Grande</p>
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT">
@@ -12,22 +12,27 @@
 </p>
 
 <div align="center">
-  <img src="https://i.ibb.co/ngDNs3c/image.png" alt="Home Page" >
-  <img src="https://i.ibb.co/NL71xQX/image.png" alt="Video Page" >
+  <img src="https://i.ibb.co/7znxX2t/Page-Home1.png" alt="Home Page" >
+  <img src="https://i.ibb.co/rkvSrw9/Page-Home.png" alt="Departaments Page" >
+  <img src="https://i.ibb.co/Gcbdqt3/Page-Admin.png" alt="Departaments Admin Page" >
+  <img src="https://i.ibb.co/ysnxmFT/Page-Lesson.png" alt="Lessons Page" >
 </div>
 
 <hr />
 
 ## Visão Geral
 
-Esta é uma aplicação web que permite aos membros da Assembleia de Deus Vitória em Cristo ralizarem seu cadastro na plataforma, vincularem-se com departamentos e assistirem vídeos tutoriais que ensinam a realizar atividades que são realizadas nas obras dos departamentos da igreja.
+Esta é uma aplicação web que permite aos membros da Assembleia de Deus Vitória em Cristo de Campina Grande realizarem seu cadastro na plataforma, vincularem-se com departamentos e assistirem vídeos tutoriais que ensinam a realizar atividades que são realizadas nas obras dos departamentos da igreja.
 
 ## Tecnologias Utilizadas
 
 - **NodeJS**: Motor v8 que executa a api na parte do servidor do serviço da advec
-- **Prisma**: ORM que vai fazer toda a lógica de mapeamento dos objetos javascript para as tabelas do banco de dados
+- **Prisma**: ORM que irá fazer toda a lógica de mapeamento dos objetos javascript para as tabelas do banco de dados
 - **PostgreSQL**: Banco de dados que serve a plataforma
-- **ReactJS**: Biblioteca JavaScript para construção de interfaces singepage de usuário.
+- **ReactJS**: Framework JavaScript para construção de interfaces singepage de usuário
+- **NextJS**: Estrutura de código para web que permite funcionalidades como renderização do lado do servidor e geração de sites estáticos
+- **Shadcn UI**: Coleção de componentes reutilizáveis e personalizáveis que permite a padronização no design da aplicação
+- **Typescript**: Linguagem de programação que oferece tipagem estática para o Javascript
 
 ## Funcionalidades
 
