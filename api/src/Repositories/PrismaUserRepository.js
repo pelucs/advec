@@ -43,12 +43,14 @@ class PrismaUserRepository {
             where: { id }
         });
 
+        if (!row) return null;
+
         return new UserBuilder()
-            .id(row.id)
-            .name(row.name)
-            .email(row.email)
-            .password(row.password)
-            .type(row.type)
+            .setId(row.id)
+            .setName(row.name)
+            .setEmail(row.email)
+            .setPassword(row.password)
+            .setType(row.type)
             .build()
     }
 }

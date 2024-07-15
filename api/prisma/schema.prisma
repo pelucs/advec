@@ -14,6 +14,7 @@ model User {
   password    String           @db.VarChar(255)
   type        String           @default("user") @db.VarChar(15)
   departments UserDepartment[]
+  request DepartmentRequests[]
 }
 
 model Department {
@@ -21,6 +22,7 @@ model Department {
   name     String           @db.VarChar(255)
   leaderId String           @unique
   users    UserDepartment[]
+  request DepartmentRequests[]
 }
 
 model UserDepartment {
@@ -36,4 +38,13 @@ model TokenBlackList {
   id        String   @id @default(uuid())
   token     String   @unique @db.VarChar(267)
   createdAt DateTime @default(now())
+}
+
+model DepartmentRequests {
+  id String @id @default(uuid())
+  userId String
+  departmentId String
+
+  user         User     @relation(fields: [userId], references: [id])
+  department   Department @relation(fields: [departmentId], references: [id])
 }
