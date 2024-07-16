@@ -4,6 +4,7 @@ const { UserBuilder } = require("../../Entities/user");
 const { JWTSECRET, tokenExpireTime } = require("../../Constants/tokenSecret");
 const { v4 } = require("uuid");
 const ValidationError = require("../../Exceptions/ValidationError");
+const service = require("./service");
 
 
 class UserController {
@@ -55,6 +56,38 @@ class UserController {
             const token = String(request.headers['x-access-token']);
             await userService.saveTokenInBlackList(token);
             return response.status(200).end();
+        } catch (error) {
+            return error instanceof ValidationError ?
+                response.status(400).json({ error: error.message }) :
+                response.status(500).json({ error });
+        }
+    }
+
+    getUserData = async (request, response) => {
+        try {
+            const id = request.userId;
+
+            const user = await service.getUserById(id);
+
+            return response.status(200).json(user);
+        } catch (error) {
+            return error instanceof ValidationError ?
+                response.status(400).json({ error: error.message }) :
+                response.status(500).json({ error });
+        }
+    }
+
+    updateUser = async (request, response) => {
+        try {
+            const id = request.userId;
+
+            const { name, email, password } = request.body;
+            
+            const data = { name, email, password };
+
+            const user = await service.updateUser(id, data);
+
+            return response.status(200).json(user);
         } catch (error) {
             return error instanceof ValidationError ?
                 response.status(400).json({ error: error.message }) :

@@ -43,6 +43,10 @@ class UserService {
     async getUserDepartments(userId) {
         return await this.departmentRepository.getUserDepartments(userId);
     }
+
+    async updateUser(id, data) {
+        return await this.userRepository.update(id, data);
+    }
 }
 
 
