@@ -1,3 +1,5 @@
+"use client"
+
 import { Menu } from "../menu";
 import { Header } from "../header";
 import { Button } from "@/components/ui/button";
@@ -50,7 +52,11 @@ export default () => {
                     {departament.description}
                   </p>
 
-                  <Button size={"sm"} className="mt-6">
+                  <Button 
+                    size={"sm"} 
+                    className="mt-6"
+                    onClick={() => alert(departament.id)}
+                  >
                     Solicitar entrada
                   </Button>
                 </div>

@@ -1,25 +1,34 @@
+"use client"
+
+import una from "@/assets/una.png";
 import Link from "next/link";
 import Image from "next/image";
+import comunicacao from "@/assets/comunicacao.png";
 
 import { Menu } from "./menu";
 import { Header } from "./header";
-import { AlertTriangle, MoveRight } from "lucide-react";
-
-import una from "@/assets/una.png";
-import comunicacao from "@/assets/comunicacao.png";
 import { Button } from "@/components/ui/button";
+import { useContext } from "react";
+import { UserContext, UserContextProvider } from "@/context/user-context";
+import { MoveRight } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 export default () => {
+
+  const { user } = useContext(UserContext);
+
   return(
     <div className="flex items-start">
       <Menu style="desktop"/>
 
       <div className="flex-1">
-        <Header/>
+        <UserContextProvider>
+          <Header/>
+        </UserContextProvider>
 
-        <div className="p-5 md:p-7 space-y-6 md:space-y-10">
+        <div className="p-5 md:p-7 space-y-6 md:space-y-8">
           <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5">
-            <h1 className="text-3xl font-bold">Olá, Pedro</h1>
+            <h1 className="text-3xl font-bold">Olá, {user?.name}</h1>
 
             <span className="text-muted-foreground">
               Seja bem-vindo! 
@@ -56,15 +65,25 @@ export default () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <div>
-              <h1 className="flex items-center gap-1 text-xl font-semibold">
-                Departamentos
-              </h1>
+          <Separator/>  
 
-              <span className="text-muted-foreground">
-                Esses são os departamentos que você serve
-              </span>
+          <div className="flex flex-col gap-5">
+            <div className="flex items-start justify-between">
+              <div>
+                <h1 className="flex items-center gap-1 text-xl font-semibold">
+                  Departamentos
+                </h1>
+
+                <span className="text-muted-foreground">
+                  Esses são os departamentos que você serve
+                </span>
+              </div>
+
+              <Button asChild>
+                <Link href="/app/departamentos">                  
+                  Ver departamentos
+                </Link>
+              </Button>
             </div>
 
             <div className="flex items-center gap-4">
@@ -94,18 +113,6 @@ export default () => {
                 UNA
               </Link>
             </div>
-
-            <Button 
-              asChild 
-              variant={"outline"}
-              className="w-fit h-fit py-4 gap-2 items-start leading-none rounded text-wrap text-orange-500" 
-            >
-              <Link href="/app/departamentos">
-                <AlertTriangle className="size-4"/>
-                
-                <span className="flex-1">Você deseja acessar o conteúdo de outro departamento? clique aqui</span>
-              </Link>
-            </Button>
           </div>
         </div>
       </div>

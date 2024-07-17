@@ -4,6 +4,12 @@ import { z } from "zod";
 import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext, useState } from "react";
+import { api } from "@/lib/axios";
+import { toast } from "./ui/use-toast";
+import { useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
+import { UserContext } from "@/context/user-context";
 
 const schemaForm = z.object({
   email: z.string().email("Formato de email inválido"),
@@ -14,13 +20,45 @@ type FormTypes = z.infer<typeof schemaForm>;
 
 export function LoginForm() {
 
+  const navigation = useRouter();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { handleSubmit, register, formState: { errors } } = useForm<FormTypes>({
     resolver: zodResolver(schemaForm)
   });
+  
+  const { setUser } = useContext(UserContext);
+  
+  const signin = async (data: FormTypes) => {
+    setIsLoading(true);
 
-  const signin = (data: FormTypes) => {
-    console.log(data);
+    const { email, password } = data;
+
+    try {
+      const res = await api.post("/user/login", {
+        email,
+        password
+      });
+      
+      const expireTokenInSeconds = 60 * 60 * 24 * 30;
+      document.cookie = `token=${res.data.token}; Path=/; max-age=${expireTokenInSeconds};`
+      
+      setUser(res.data.user); 
+
+      navigation.push("/app");
+
+    } catch(error: any) {
+      if(error.response.data.error === "User email and password does not match.") {
+        toast({
+          title: "Usuário já cadastrado com esse email!"
+        });
+      }
+    } finally {
+      setIsLoading(false);
+    }
   }
+
   return(
     <form 
       onSubmit={handleSubmit(signin)} 
@@ -59,8 +97,12 @@ export function LoginForm() {
         Esqueceu a senha? <span className="font-semibold underline text-orange-500">clique aqui</span>
       </span>
 
-      <Button type="submit" className="button-theme">
-        Entrar
+      <Button 
+        type="submit" 
+        className="button-theme"
+        disabled={isLoading}
+      >
+        { isLoading ? <Loader className="size-4 animate-spin"/> : "Entrar"}
       </Button>
     </form>
   );

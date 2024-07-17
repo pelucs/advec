@@ -3,6 +3,7 @@ import logotipoBranca from '@/assets/logotipo-advec-branca.png';
 import logoAnoDeServir from '@/assets/logo-ano-de-servir.svg';
 
 import { LoginForm } from "@/components/login-form";
+import { UserContextProvider } from "@/context/user-context";
 
 export default function Home() {
   return (
@@ -37,7 +38,9 @@ export default function Home() {
             </p>
           </div>
 
-          <LoginForm/>
+          <UserContextProvider>
+            <LoginForm/>
+          </UserContextProvider>
         </div>
       </div>
     </main>

@@ -1,5 +1,6 @@
 "use client"
 
+import { Loading } from "@/components/loading";
 import { useGetModulesByDepartamentQuery } from "@/graphql/generated";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +18,7 @@ export function ListOfModules({ departament }: ListOfModulesProps) {
   });
 
   if(!data || !data.modules) {
-    return <p>Carregando...</p>
+    return <Loading/>
   }
   
   return(
@@ -25,7 +26,7 @@ export function ListOfModules({ departament }: ListOfModulesProps) {
       {data.modules.map(module => (
         <Link
           key={module.slug} 
-          href={`/app/${departament}/${module.slug}/aulas?desc=${module.description.html}`} 
+          href={`/app/${departament}/${module.slug}/aulas`} 
           className="flex flex-col gap-2"
         >
           <div className="rounded-md aspect-video overflow-hidden bg-secondary">

@@ -1,19 +1,18 @@
 'use client'
 
-import '@vime/core/themes/default.css'
-import { DefaultUi, Player, Youtube } from "@vime/react";
-
+import ReactPlayer from "react-player";
 interface VideoPreviewProps{
   videoId: string;
 }
 
 export function VideoPreview({ videoId }: VideoPreviewProps){
   return(
-    <div className="flex-1">
-      <Player>
-        <Youtube videoId={videoId}/>
-        <DefaultUi/>
-      </Player>
-    </div>
+    <ReactPlayer
+      className='react-player'
+      url={`https://www.youtube.com/watch?v=${videoId}`}
+      controls={true}
+      width='100%'
+      height='100%'
+    />
   );
 }

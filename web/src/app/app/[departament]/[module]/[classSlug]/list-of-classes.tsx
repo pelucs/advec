@@ -89,16 +89,16 @@ function ListOfClassesForDesktop({ departament, module, open, setOpen, data }: L
       {/* Aulas */}
       {open && (
         <div className="md:pr-2 flex flex-col gap-4 overflow-y-auto">
-          {data.map(classModule => (
+          {data.map(classByModule => (
             <Button 
               asChild
               variant={"outline"} 
-              key={classModule.slug}
+              key={classByModule.slug}
               className="w-full h-fit py-3 flex flex-col items-start gap-2 rounded-lg"
             >
-              <Link href={`/app/${departament}/${module}/${classModule.slug}`}>
+              <Link href={`/app/${departament}/${module}/${classByModule.slug}`}>
                 <h1 className="text-wrap text-base">
-                  {classModule.name}
+                  {classByModule.name}
                 </h1>
 
                 <span className="flex items-center gap-1 text-muted-foreground">
@@ -137,16 +137,16 @@ function ListOfClassesForMobile({ departament, module, open, setOpen, data }: Li
         "block": open,
         "hidden": !open
       })}>
-        {data.map(classModule => (
+        {data.map(classByModule => (
           <Button 
             asChild
             variant={"ghost"} 
-            key={classModule.slug}
+            key={classByModule.slug}
             className="w-full h-fit py-3 flex flex-col items-start gap-2 rounded-none"
           >
-            <Link href={`/app/${departament}/${module}/${classModule.slug}`}>
+            <Link href={`/app/${departament}/${module}/${classByModule.slug}`}>
               <h1 className="text-wrap text-base">
-                {classModule.name}
+                {classByModule.name}
               </h1>
 
               <span className="flex items-center gap-1 text-muted-foreground">

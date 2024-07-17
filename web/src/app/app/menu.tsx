@@ -8,6 +8,7 @@ import logotipoAdvecBranca from '@/assets/logotipo-advec-branca.png';
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { 
   ChevronsRight, 
   HeartHandshake, 
@@ -17,7 +18,6 @@ import {
   User,
   Menu as MenuIcon
 } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface MenuProps {
   style: "desktop" | "mobile";

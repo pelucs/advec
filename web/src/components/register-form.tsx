@@ -1,9 +1,12 @@
 "use client"
 
 import { z } from "zod";
+import { api } from "@/lib/axios";
 import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { toast } from "./ui/use-toast";
 
 const schemaForm = z.object({
   name: z.string().min(4, "Nome deve conter no mínimo 4 caracteres"),
@@ -20,12 +23,36 @@ type FormTypes = z.infer<typeof schemaForm>;
 
 export function RegisterForm() {
 
+  const navigation = useRouter();
+
   const { handleSubmit, register, formState: { errors } } = useForm<FormTypes>({
     resolver: zodResolver(schemaForm)
   });
 
-  const signin = (data: FormTypes) => {
-    console.log(data);
+  const signin = async (data: FormTypes) => {
+
+    const { name, email, password } = data;
+
+    try {
+      await api.post("/user/register", {
+        name,
+        email,
+        password
+      })
+      
+      toast({
+        title: "Conta registrada com sucesso!"
+      });
+
+      // Irá redirecionar para página de login
+      setTimeout(() => navigation.push("/"), 2000);
+    } catch(error: any) {
+      if(error.response.data.error === "There is already an user registered with this email!.") {
+        toast({
+          title: "Usuário já cadastrado com esse email!"
+        });
+      }
+    }
   }
 
   return(

@@ -15,11 +15,11 @@ interface ClassPanelProps {
 
 export function ClassPanel({ module }: ClassPanelProps) {
 
-  const { classModule } = useParams<{ classModule: string }>();
+  const { classSlug } = useParams<{ classSlug: string }>();
 
   const { data } = useGetClassBySlugQuery({
     variables: {
-      slug: classModule
+      slug: classSlug
     }
   });
 

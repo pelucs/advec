@@ -1,9 +1,9 @@
 const ValidationError = require("../ValidationError");
 
-class UserValidationError extends ValidationError {
+class DepartmentValidationError extends ValidationError {
     constructor(message) {
         super(message);
     }
 }
 
-module.exports = UserValidationError;
+module.exports = DepartmentValidationError;
