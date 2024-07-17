@@ -36,8 +36,6 @@ async function validateJWT(request, response, next) {
             if (error) throw new UserJWTIsInvalidError();
 
             request.userId = decoded.id;
-            request.userName = decoded.name;
-            request.email = decoded.email;
             request.authenticated = true;
             next();
         });
