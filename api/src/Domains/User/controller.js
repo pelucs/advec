@@ -13,14 +13,17 @@ class UserController {
         try {
             const { name, email, password } = request.body;
 
+            const hashed = await service.generateHashedPassword(password);
+
             const user = new UserBuilder()
                 .setId(v4())
                 .setName(name)
                 .setEmail(email)
-                .setPassword(password)
+                .setPassword(hashed)
                 .build();
 
             const userResult = await userService.createUser(user);
+            delete userResult["password"];
 
             return response.status(201).json(userResult);
         } catch (error) {

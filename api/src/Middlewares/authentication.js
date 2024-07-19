@@ -12,9 +12,7 @@ async function validateUser(request, response, next) {
 
         const user = await userService.getUserByEmail(email);
 
-        if (!user || user.getPassword() !== password) {
-            throw new UserPasswordIsIncorrectError();
-        }
+        await userService.checkUserPassword(password, user.getPassword());
         next();
     } catch (error) {
         return error instanceof UserValidationError ?
