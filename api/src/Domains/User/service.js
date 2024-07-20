@@ -3,6 +3,8 @@ const UserDoesntExistsError = require("../../Exceptions/User/UserDoesntExistsErr
 const PrismaUserRepository = require("../../Repositories/PrismaUserRepository");
 const PrismaTokenBlackListRepository = require("../../Repositories/PrismaTokenBlackListRepository");
 const PrismaDepartmentRepository = require("../../Repositories/PrismaDepartmentRepository");
+const bcrypt = require("bcrypt");
+const UserPasswordIsIncorrectError = require("../../Exceptions/User/UserPasswordIsIncorrectError");
 
 class UserService {
     constructor() {
@@ -46,6 +48,18 @@ class UserService {
 
     async updateUser(id, data) {
         return await this.userRepository.update(id, data);
+    }
+
+    async generateHashedPassword(password) {
+        const saltRounds = 10;
+
+        const salt = await bcrypt.genSalt(saltRounds);
+        return await bcrypt.hash(password, salt);
+    }
+
+    async checkUserPassword(password, passwordFromDB) {
+        const match = await bcrypt.compare(password, passwordFromDB);
+        if (!match) throw new UserPasswordIsIncorrectError();
     }
 }
 

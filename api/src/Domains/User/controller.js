@@ -13,14 +13,17 @@ class UserController {
         try {
             const { name, email, password } = request.body;
 
+            const hashed = await service.generateHashedPassword(password);
+
             const user = new UserBuilder()
                 .setId(v4())
                 .setName(name)
                 .setEmail(email)
-                .setPassword(password)
+                .setPassword(hashed)
                 .build();
 
             const userResult = await userService.createUser(user);
+            delete userResult["password"];
 
             return response.status(201).json(userResult);
         } catch (error) {
@@ -32,18 +35,15 @@ class UserController {
 
     login = async (request, response) => {
         try {
-            const { email }= request.body;
+            const { email } = request.body;
 
             const user = await userService.getUserByEmail(email);
-            const userDepartments = await userService.getUserDepartments(user.getId());
-            user.departments = userDepartments;
-            delete user["password"];
 
             const token = jwt.sign({
                 id: user.getId()
             }, JWTSECRET, { expiresIn: tokenExpireTime });
 
-            return response.status(200).json({auth: true, token, user});
+            return response.status(200).json({auth: true, token});
         } catch (error) {
             return error instanceof ValidationError ?
                 response.status(400).json({ error: error.message }) :
@@ -68,6 +68,9 @@ class UserController {
             const id = request.userId;
 
             const user = await service.getUserById(id);
+            const userDepartments = await userService.getUserDepartments(user.getId());
+            user.departments = userDepartments;
+            delete user["password"];
 
             return response.status(200).json(user);
         } catch (error) {
