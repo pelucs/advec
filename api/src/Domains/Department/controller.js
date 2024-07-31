@@ -16,9 +16,11 @@ class DepartmentController {
 
             const departmentRequest = new DepartmentRequestBuilder()
                 .setId(v4())
-                .setUserId(request.userId)
+                .setUserId(String(request.userId))
                 .setDepartmentId(departmentId)
                 .build();
+
+            console.log("requisição -> ", departmentRequest);
 
             const result = await service.createMemberRequest(departmentRequest);
 
